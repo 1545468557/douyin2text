@@ -1,0 +1,6 @@
+#!/bin/bash
+# douyin2text 启动器：不需要激活虚拟环境。
+# 用法：./d2t "抖音链接或分享文本" [其他参数]
+set -euo pipefail
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+exec "$HERE/.venv/bin/python" -m douyin2text "$@"

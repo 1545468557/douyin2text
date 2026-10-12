@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.uvcache/
+.venv/
+venv/
+
+# 本地数据：模型 228MB、缓存里有访客 cookie（凭据）、历史记录含转写内容
+models/
+.cache/
+uv.lock
+
+# 转写产物
+*.txt
+!requirements.txt
+!LICENSES/*.txt
+*.mp4
+*.wav
+*.part
+session.json
+history.json
+uploads/
+
+# 构建产物
+*.app/
+build/
+dist/
+
+# macOS
+.DS_Store

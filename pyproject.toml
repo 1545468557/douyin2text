@@ -1,0 +1,75 @@
+[project]
+name = "douyin2text"
+version = "0.2.0"
+description = "把抖音视频里的人声拆成文字稿，本地离线转写"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+keywords = ["douyin", "tiktok", "asr", "speech-to-text", "transcription", "sensevoice", "字幕", "语音转文字"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Environment :: MacOS X",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: Chinese (Simplified)",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Sound/Audio :: Speech",
+    "Topic :: Text Processing",
+]
+
+dependencies = [
+    "wreq>=0.12.3,<1.0",
+    "playwright>=1.40",
+    "sherpa-onnx>=1.10",
+    "numpy>=1.24",
+]
+
+[project.optional-dependencies]
+# 图形界面。只要命令行的话不需要这些。
+gui = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "python-multipart>=0.0.9",
+    "pywebview>=5.0",
+]
+
+dev = ["pytest>=8.0", "httpx>=0.27"]
+
+all = ["douyin2text[gui,dev]"]
+
+[project.urls]
+Homepage = "https://github.com/1545468557/douyin2text"
+Repository = "https://github.com/1545468557/douyin2text"
+Issues = "https://github.com/1545468557/douyin2text/issues"
+
+[project.scripts]
+douyin2text = "douyin2text.cli:main"
+douyin2text-app = "douyin2text.desktop:main"
+douyin2text-ui = "douyin2text.server:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["douyin2text"]
+
+[tool.hatch.build.targets.sdist]
+# 这些不进源码包：模型几万个字节、缓存里有 cookie、App 是构建产物。
+exclude = [
+    "/models",
+    "/.cache",
+    "/.venv",
+    "/*.app",
+    "/docs/screenshot.png",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

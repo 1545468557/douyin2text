@@ -1,0 +1,33 @@
+douyin2text
+Copyright 2026 zhouxiang (@1545468557)
+
+This product includes software developed as part of
+Douyin_TikTok_Download_API (https://github.com/Evil0ctal/Douyin_TikTok_Download_API),
+Copyright 2021-2026 Evil0ctal and contributors, licensed under the
+Apache License, Version 2.0. The full text is in LICENSES/Apache-2.0.txt.
+
+The following files are derived from that project and remain under
+Apache-2.0, not the MIT license that covers the rest of this repository:
+
+  douyin2text/_vendor/sm3.py
+  douyin2text/_vendor/abogus.py
+      Copied from src/dtk/signing/native/ in the upstream project.
+
+  douyin2text/_vendor/tokens.py
+      A subset of src/dtk/signing/native/tokens.py containing only the pure,
+      IO-free token generators. The upstream module also mints cookies over
+      HTTP; that half was dropped and cookie minting is done by driving a real
+      browser instead (see douyin2text/session.py).
+
+  douyin2text/douyin.py
+  douyin2text/session.py
+      The Douyin request parameter table, the two signature construction paths
+      and the salted x-secsdk-web-signature algorithm are ported from
+      src/dtk/platforms/douyin/{params,endpoints}.py and
+      src/dtk/signing/native/{signer,websign}.py. The code around them - the
+      CLI, the HTTP service, the pipeline and the caching - is original to this
+      repository.
+
+Changes made to the derived files: the package-relative import of sm3 was
+rewritten, dead branches and browser-only paths were removed, and comments were
+rewritten. No signatures or parameter values were altered.
